@@ -1,16 +1,12 @@
 import gql from 'graphql-tag';
-import { messages } from './fixtures';
 
 export default {
-  Query: {
-    messages: () => messages,
-  },
   Mutation: {
     selectMessage: (_, { messageId }, { cache }) => {
       const id = `Message:${messageId}`;
       const fragment = gql`
         fragment selectMessage on Message {
-          id
+          __typename
           selected
         }
       `;
@@ -22,5 +18,11 @@ export default {
       
       return data;
     },
-  }
+  },
+  Message: {
+    selected: (source, args, context) => {
+      // list items default to an unselected state
+      return false;
+    },
+  },
 };

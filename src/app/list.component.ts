@@ -30,10 +30,10 @@ export class ListComponent implements OnInit {
     this.messages = this.apollo.watchQuery<Query>({
       query: gql`
         query allMessages {
-          messages @client {
+          messages {
             id
             content
-            selected
+            selected @client
             author {
               id
               firstName

@@ -20,7 +20,6 @@ export class SelectorComponent {
       mutation: gql`
         mutation selectMessage($messageId: Int!) {
           selectMessage(messageId: $messageId) @client {
-            id
             selected
           }
         }
