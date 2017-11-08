@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export default {
+export const resolvers = {
   Mutation: {
     selectMessage: (_, { messageId }, { cache }) => {
       const id = `Message:${messageId}`;
@@ -19,7 +19,7 @@ export default {
       return data;
     },
   },
-  Message: {
+  LocalMessage: {
     selected: (source, args, context) => {
       // list items default to an unselected state
       return false;

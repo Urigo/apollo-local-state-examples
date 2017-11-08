@@ -33,7 +33,7 @@ export class ListComponent implements OnInit {
           messages {
             id
             content
-            selected @client
+            selected
             author {
               id
               firstName

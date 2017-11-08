@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 // Apollo
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { withClientState } from 'apollo-link-state';
-import { HttpLink } from 'apollo-link-http';
 
-import schema from './schema';
+import { mergeLink } from './mergeLink'
 
 @NgModule({
   exports: [
@@ -13,17 +11,12 @@ import schema from './schema';
   ]
 })
 export class GraphQLModule {
-  constructor(
-    apollo: Apollo
-  ) {
+  constructor(apollo: Apollo) {
 
-    const remoteHttpLink = new HttpLink({ uri: "https://xl54rr13l.lp.gql.zone/graphql" });
-
-    const local = withClientState(schema);
-    // create Apollo
+    const myCache = new InMemoryCache();
     apollo.create({
-      link: local.concat(remoteHttpLink),
-      cache: new InMemoryCache()
+      link: mergeLink(myCache),
+      cache: myCache
     });
   }
 }

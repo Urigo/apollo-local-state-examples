@@ -19,7 +19,7 @@ export class SelectorComponent {
     this.apollo.mutate({
       mutation: gql`
         mutation selectMessage($messageId: Int!) {
-          selectMessage(messageId: $messageId) @client {
+          selectMessage(messageId: $messageId) {
             selected
           }
         }
